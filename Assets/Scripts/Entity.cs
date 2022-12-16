@@ -7,8 +7,8 @@ using DG.Tweening;
 public class Entity : MonoBehaviour
 {
     [SerializeField] private ParticleSystem _fx = null;
-    
-    pria=v
+
+    private float _energy = 0f;
     private Animator _animator = null;
 
     private void Awake()
