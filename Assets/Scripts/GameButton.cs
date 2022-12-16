@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using DG.Tweening;
 
@@ -14,6 +15,11 @@ public class GameButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private Button _button = null;
     #endregion
 
+    #region Events
+    [HideInInspector]
+    public UnityEvent OnClick = new UnityEvent();
+    #endregion
+
     #region Methods
     private void Awake()
     {
@@ -23,6 +29,10 @@ public class GameButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             Debug.LogError("No Component Error found.");
             return;
         }
+    }
+    private void Start()
+    {
+        _button.onClick.AddListener(OnClick.Invoke);
     }
 
     public void OnPointerClick(PointerEventData eventData)
