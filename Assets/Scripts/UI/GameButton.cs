@@ -11,6 +11,10 @@ public class GameButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 {
     #region Attributes
     [SerializeField] private float _onHoverScale = 1.2f;
+    [SerializeField] private float _onClickScale = 1.2f;
+    [SerializeField] private float _onClickDuration = 0.3f;
+    [SerializeField] private int _onClickVibrato=7;
+    [SerializeField] private int _onClickElasticity = 1;
 
     private Button _button = null;
     #endregion
@@ -37,7 +41,7 @@ public class GameButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
 
     public void OnPointerClick(PointerEventData eventData)
     {
-        transform.DOPunchScale(Vector3.one * 1.2f, 0.3f, 7, 1);
+        transform.DOPunchScale(Vector3.one * _onClickScale, _onClickDuration, _onClickVibrato, _onClickElasticity);
     }
     public void OnPointerEnter(PointerEventData eventData)
     {

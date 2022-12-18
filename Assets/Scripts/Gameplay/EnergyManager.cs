@@ -5,15 +5,14 @@ using UnityEngine;
 public class EnergyManager : MonoBehaviour
 {
     #region Attributes
-    [SerializeField] private int _valuesCount = 5;
     [SerializeField] private int _maxEnergy = 50;
-    
+
     [Space]
     [SerializeField] private HUD _hud = null;
     [SerializeField] private Entity _entity = null;
 
+    private int _valuesCount = 5;
     private int _crtEnergy = 0;
-    private int _midValue = 25;
     private int[] _values;
     #endregion
 
@@ -25,6 +24,10 @@ public class EnergyManager : MonoBehaviour
     public int MaxEnergy
     {
         get { return _maxEnergy; }
+    }
+    public int MidEnergy
+    {
+        get { return _maxEnergy / 2; }
     }
     public float Strength
     {
@@ -39,8 +42,14 @@ public class EnergyManager : MonoBehaviour
     #region Methods
     private void Start()
     {
+        _hud.OnEnergyChanged.AddListener((float value) =>
+        {
+            _crtEnergy = (int)value;
+            _entity.Energy = _crtEnergy;
+        });
+
         _crtEnergy = _maxEnergy;
-        _midValue = _maxEnergy / 2;
+        _entity.Energy = _crtEnergy;
 
         InitEnergyValues();
     }
@@ -50,7 +59,7 @@ public class EnergyManager : MonoBehaviour
 
         float step = _maxEnergy / _valuesCount;
         float crt = step;
-        
+
         for (int i = 0; i < _valuesCount; ++i)
         {
             _values[i] = (int)crt;

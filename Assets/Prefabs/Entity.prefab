@@ -459,7 +459,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a28acc6800fe94b47b48898b82f7449f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _energyDivider: 5
+  _delayBeforeSmallJump: 1
+  _delayBeforeBigJump: 0.5
   _fx: {fileID: 8857187514342219459}
+  _hud: {fileID: 0}
+  _energyManager: {fileID: 0}
 --- !u!54 &7589786874086757105
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -474,7 +479,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 112
   m_CollisionDetection: 0
 --- !u!65 &7589786874086757106
 BoxCollider:
