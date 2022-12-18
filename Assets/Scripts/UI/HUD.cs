@@ -46,7 +46,7 @@ public class HUD : MonoBehaviour
     public bool CanUpdateHeight
     {
         get { return _canUpdateHeight; }
-        set { _canUpdateHeight = value;  }
+        set { _canUpdateHeight = value; }
     }
     #endregion
 
@@ -109,7 +109,7 @@ public class HUD : MonoBehaviour
         //_strengthSlider.value = _energyManager.Strength;
         OnEnergyChanged.Invoke(value);
     }
-    
+
     private void FillSlider()
     {
         StartCoroutine(FillCoroutine());
@@ -125,13 +125,18 @@ public class HUD : MonoBehaviour
         OnSliderFilled.Invoke();
 
         // empty slider
-        _strengthSlider.DOValue(0f, _strengthFillDuration*1.5f);
+        _strengthSlider.DOValue(0f, _strengthFillDuration * 1.5f);
     }
-    
+
     public void ShowHeight(bool show)
     {
         _height = 0f;
         _heightText.DOFade(show ? 1f : 0f, show ? 0.5f : 1.5f);
+
+        if (!show)
+        {
+            _confirmButton.Interactable = true;
+        }
     }
     private void UpdateHeight(float height)
     {
@@ -141,8 +146,10 @@ public class HUD : MonoBehaviour
 
     private void OnConfirm()
     {
+        _confirmButton.Interactable = false;
+
         FillSlider();
-        
+
         OnConfirmRequest.Invoke();
     }
     private void OnReset()
